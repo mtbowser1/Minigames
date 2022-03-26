@@ -1,6 +1,6 @@
+#minigames v1.01
 #Sample code project, features some basic minigames and python exercises
 #Marshall Bowser, 3/22/22
-#Program uses in text citations and demonstrates OOP principles with function calls
 
 from random import * #imports the random library which we need for most of our games to work, the asterisk denotes everything in the library
 #alternatively, we could import a single function if we desired
@@ -67,7 +67,42 @@ def rps(): #minigame is broken into a function, demonstrates OOP coding practice
             print(trashtalkwin())
         elif compchoice == 2 and rpschoice == 'scissors':
             print("We picked the same thing, "+rpschoice+". A tie, then!")
-        print("You've won", playerwin, " games "+name+" and I've won", playerlose, " games.") #you need to use this print format for integers mixed with string statements to prevent errors
+        print("You've won", playerwin, "games "+name+" and I've won", playerlose, "games.") #you need to use this print format for integers mixed with string statements to prevent errors
+
+def riddleFunction():
+    while 1:
+        #a challenge is making similar concepts distinct - i can have a function called riddles, for example, but a dictionary called riddles might make problems down the road
+        riddleDict = {'What 4-letter word can be written forward, backward or upside down, and can still be read from left to right? (riddles.com)': 'Noon',
+                      'What is full all day and empty at night? (riddles.com)': 'Shoes',
+                      'What has to be broken before you can use it? (fatherly.com)': 'Egg',
+                      'What has many ears but cannot hear?': 'Corn',
+                      'The more you take, the more you leave behind (fatherly.com)': 'Footsteps',
+                      'When things go wrong, what can you always count on? (fatherly.com)': 'Fingers',
+                      'What goes up but never goes back down? (fatherly.com)': 'Age',
+                      'What can you catch but not throw? (fatherly.com)': 'Cold',
+                      'What belongs to one person, but everyone else it more? (fatherly.com)': 'Name',
+                      'Where can you find cities, towns, shops, and streets but no people? (fatherly.com)': "Map"
+        }
+        random = randrange(len(riddleDict.keys())) #chooses a random integer based on the size of our dictionary - dictionary can be modified and code remains functional
+        riddleValues = list(riddleDict.values()) #creates a list of values
+        riddleKeys = list(riddleDict.keys()) #creates a list of keys
+        print(riddleKeys[random]) #using the same random integer above we print a key, or question
+        answer = input(str()) #gets input
+        answer = answer.lower() #cleans up the input a bit, accepts capitilzation variations (No, NO)
+        if answer == riddleValues[random].lower(): #compares value, or answer, to the input which is also cleaned for capitilization
+            print("You got it right! Well done.")
+        else:
+            print("I'm sorry, that wasn't right. The answer is ", riddleValues[random], ".", sep='') #the seperator feature with no input eliminates the extra space around the period
+        print("Would you like to play again or quit?")
+        answer2 = input(str())
+        answer2 = answer2.lower()
+        if answer2 == 'no':
+            break
+        elif answer2 == 'quit':
+            break
+        else:
+            print('OK!')
+
 
 #the following lines are the first text in the program the user sees
 print("What is your name?")
@@ -79,11 +114,14 @@ while 1: #loops a menu, else statement handles errors on bad input without crash
     print("~~~~~ Minigame Menu ~~~~~")
     print("Please choose a function.")
     print("1. Rock, Paper, Scissors.")
+    print("2. Riddle Me This.")
     print("0. Quit.")
     menuchoice = str(input()) #string statement prevents a program crash from non-integer input
     if menuchoice == '1':
         rps()
     elif menuchoice == '0':
         exit()
+    elif menuchoice == '2':
+        riddleFunction()
     else:
         print("Pick an integer between 0 and 9.")
